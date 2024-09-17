@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -56,5 +57,27 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function updateFcmToken(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fcm_token' => 'required|string'
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        $data = $request->all();
+
+        $request->user()->update([
+            'fcm_token' => $data['fcm_token']
+        ]);
+
+        return response()->noContent();
     }
 }
