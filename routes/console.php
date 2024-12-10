@@ -13,7 +13,8 @@ Artisan::command('inspire', function () {
 
 Artisan::command('fcm', function(){
 
-    $tokens = User::query()->select(['fcm_token'])->get()->pluck('fcm_token')->toArray();
+    $tokens = User::query()->whereNotNull('fcm_token')->select(['fcm_token'])->get()->pluck('fcm_token')->toArray();
+
     $data = [
         'title' => 'test',
         'body' => 'test',

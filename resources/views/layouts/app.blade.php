@@ -42,8 +42,7 @@
                 projectId: "{{ firebase_config()['projectId'] }}",
                 storageBucket: "{{ firebase_config()['storageBucket'] }}",
                 messagingSenderId: "{{ firebase_config()['messagingSenderId'] }}",
-                appId: "{{ firebase_config()['appId'] }}",
-                measurementId: "{{ firebase_config()['measurementId'] }}"
+                appId: "{{ firebase_config()['appId'] }}"
             };
 
             const app = initializeApp(firebaseConfig);

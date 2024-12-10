@@ -22,7 +22,7 @@ class NotificationController extends Controller
         ]);
 
 
-        $tokens = User::query()->select(['fcm_token'])->get()->pluck('fcm_token')->toArray();
+        $tokens = User::query()->whereNotNull('fcm_token')->select(['fcm_token'])->get()->pluck('fcm_token')->toArray();
         $data = [
             'title' => $params['title'],
             'body' => $params['body'],
